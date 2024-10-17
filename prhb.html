@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TITULO DEL VIDEO</title>
+</head>
+<body>
+  <div style="max-width: 100%; overflow: hidden;">
+    <video id="videoPlayer" controls style="width: 100%;">
+      <source src="https://cdn.videy.co/9TGdsArc.mp4" type="video/mp4">
+      Tu navegador no soporta la reproducción de videos.
+    </video>
+  </div>
+
+  <!-- Contenedor para el mensaje de publicidad -->
+  <div id="adMessage" style="display: none; margin-top: 20px; text-align: center;">
+    <p>Gracias por ver el video. <a id="adLink" href="#" target="_blank" style="color: blue; text-decoration: underline;">Haz clic aquí para ver más contenido.</a></p>
+  </div>
+
+  <script>
+    // Enlace directo de Adsterra
+    const adLink = "https://audiencegarret.com/vuwcdv9th?key=e53779fcb143d751d916151d78120c0c";
+    const videoPlayer = document.getElementById('videoPlayer');
+    const adMessage = document.getElementById('adMessage');
+    const adLinkElement = document.getElementById('adLink');
+    let userInteracted = false;
+
+    // Verifica si el usuario ha interactuado con el video (play, pause, seek)
+    videoPlayer.addEventListener('play', () => {
+      if (!userInteracted) {
+        userInteracted = true;
+        // Muestra el mensaje de publicidad cuando el video comienza
+        adMessage.style.display = 'block';
+        // Asigna el enlace al elemento
+        adLinkElement.href = adLink;
+      }
+    });
+
+    // Evento que se activa cuando el video finaliza
+    videoPlayer.addEventListener('ended', () => {
+      // Solo muestra el enlace si el usuario ha interactuado con el video
+      if (userInteracted) {
+        adMessage.style.display = 'block';
+        adLinkElement.href = adLink;
+      }
+    });
+  </script>
+</body>
+</html>
